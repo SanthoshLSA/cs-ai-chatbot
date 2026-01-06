@@ -1,0 +1,38 @@
+{
+  "dbms": [
+    {"id":1,"q":"PRIMARY KEY property?","options":["a) NULL OK","b) Duplicate OK","c) Unique NOT NULL","d) Optional"],"ans":"c"},
+    {"id":2,"q":"3NF eliminates?","options":["a) Partial deps","b) Transitive deps","c) Both","d) None"],"ans":"b"},
+    {"id":3,"q":"FOREIGN KEY enforces?","options":["a) Uniqueness","b) Referential integrity","c) Indexing","d) Sorting"],"ans":"b"},
+    {"id":4,"q":"1NF requires?","options":["a) No repeating groups","b) No partial deps","c) No transitive deps"],"ans":"a"},
+    {"id":5,"q":"SQL JOIN type for all records?","options":["a) INNER","b) LEFT","c) FULL OUTER"],"ans":"c"},
+    {"id":6,"q":"ACID property for concurrency?","options":["a) Atomicity","b) Isolation","c) Durability"],"ans":"b"},
+    {"id":7,"q":"INDEX improves?","options":["a) Insert speed","b) SELECT speed","c) Storage"],"ans":"b"},
+    {"id":8,"q":"ER diagram: rectangle = ?","options":["a) Entity","b) Attribute","c) Relationship"],"ans":"a"},
+    {"id":9,"q":"BCNF stricter than?","options":["a) 1NF","b) 2NF","c) 3NF"],"ans":"c"},
+    {"id":10,"q":"TRIGGER executes?","options":["a) SELECT","b) INSERT/UPDATE/DELETE","c) All DDL"],"ans":"b"}
+  ],
+  "os": [
+    {"id":1,"q":"Deadlock condition?","options":["a) Mutual exclusion","b) No preemption","c) Hold & wait"],"ans":"c"},
+    {"id":2,"q":"Starvation-free scheduling?","options":["a) FCFS","b) Round Robin","c) SJF"],"ans":"b"},
+    {"id":3,"q":"Page fault causes?","options":["a) Page not in memory","b) Disk full","c) CPU idle"],"ans":"a"},
+    {"id":4,"q":"Context switch time?","options":["a) Process creation","b) Mode switch","c) Both"],"ans":"c"},
+    {"id":5,"q":"Banker's algorithm prevents?","options":["a) Deadlock","b) Starvation","c) Thrashing"],"ans":"a"},
+    {"id":6,"q":"FIFO page replacement?","options":["a) Belady anomaly","b) Optimal","c) LRU"],"ans":"a"},
+    {"id":7,"q":"Semaphore value 0 means?","options":["a) Resource available","b) Processes waiting"],"ans":"b"},
+    {"id":8,"q":"Virtual memory uses?","options":["a) RAM only","b) Disk + RAM"],"ans":"b"},
+    {"id":9,"q":"Priority scheduling issue?","options":["a) Starvation","b) Convoy effect"],"ans":"a"},
+    {"id":10,"q":"Mutex vs Binary Semaphore?","options":["a) Ownership","b) Counting","c) Priority"],"ans":"a"}
+  ],
+  "dsa": [
+    {"id":1,"q":"Binary search complexity?","options":["a) O(n)","b) O(log n)","c) O(n log n)"],"ans":"b"},
+    {"id":2,"q":"Stack principle?","options":["a) FIFO","b) LIFO","c) Random"],"ans":"b"},
+    {"id":3,"q":"Quicksort average case?","options":["a) O(n)","b) O(n log n)","c) O(n^2)"],"ans":"b"},
+    {"id":4,"q":"Hash table collision?","options":["a) Chaining","b) Open addressing","c) Both"],"ans":"c"},
+    {"id":5,"q":"AVL tree property?","options":["a) Height balanced","b) Weight balanced"],"ans":"a"},
+    {"id":6,"q":"BFS uses?","options":["a) Stack","b) Queue"],"ans":"b"},
+    {"id":7,"q":"Dijkstra finds?","options":["a) Shortest path","b) MST"],"ans":"a"},
+    {"id":8,"q":"Merge sort space?","options":["a) O(1)","b) O(n)"],"ans":"b"},
+    {"id":9,"q":"Heap property?","options":["a) Complete binary tree","b) BST"],"ans":"a"},
+    {"id":10,"q":"Topological sort for?","options":["a) DAG","b) Cycle graphs"],"ans":"a"}
+  ]
+}

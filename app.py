@@ -36,9 +36,11 @@ def query_ai(prompt):
     except Exception as e:
         return f"⚠️ Connection Error: {str(e)}"
 
-
-st.set_page_config(page_title="CS Interview Bot", layout="wide", initial_sidebar_state="expanded")
-
+st.set_page_config(
+    page_title="CS Interview Bot", 
+    layout="wide", 
+    initial_sidebar_state="expanded" # Keep it open initially
+)
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -51,7 +53,29 @@ st.markdown("""
         font-family: 'Poppins', sans-serif !important;
         background: linear-gradient(135deg, #0a0e27 0%, #1a1d3a 50%, #0f1729 100%);
     }
+            
+           /* Force the sidebar to stay visible regardless of internal state */
+    [data-testid="stSidebar"] {
+        transform: none !important;
+        visibility: visible !important;
+        left: 0 !important;
+    }
 
+    /* Hide the 'X' close button inside the sidebar */
+    [data-testid="sidebar-close-button"] {
+            color:red;
+        
+    }
+
+    /* Hide the chevron arrow on the main page */
+    [data-testid="stSidebarCollapsedControl"] {
+        display: none !important;
+    }
+
+    /* Ensure the main content area adjusts its margin to account for the sidebar */
+    [data-testid="stAppViewBlockContainer"] {
+        margin-left: 0px !important;
+    }
     h1, h2, h3, h4, h5, h6 {
         font-family: 'Poppins', sans-serif !important;
         font-weight: 600 !important;
@@ -362,7 +386,7 @@ st.markdown("""
     [data-testid="stChatInput"] {
         background: transparent !important;
         border: 2px solid rgba(33, 150, 243, 0.6) !important;
-        border-radius: 20px !important;
+        border-radius: 50px !important;
         padding: 0.75rem 1.25rem !important;
         box-shadow:
             0 4px 20px rgba(0, 0, 0, 0.4),
@@ -446,16 +470,19 @@ if 'quiz_score' not in st.session_state:
 if 'quiz_total' not in st.session_state:
     st.session_state.quiz_total = 0
 
-st.markdown(f'''
-<div class="score-live">
-     Score: <strong>{st.session_state.quiz_score}/{st.session_state.quiz_total}</strong>
-</div>
-''', unsafe_allow_html=True)
+# Show live score only during quiz mode
+if st.session_state.get("quiz_active", False):
+    st.markdown(f'''
+    <div class="score-live">
+         Score: <strong>{st.session_state.quiz_score}/{st.session_state.quiz_total}</strong>
+    </div>
+    ''', unsafe_allow_html=True)
 
 # Sidebar: quiz configuration and control
 st.sidebar.title("Quiz Control Panel")
+
 topic = st.sidebar.selectbox("Select Subject", list(questions.keys()))
-num_q = st.sidebar.slider("Number of Questions", 3, 10, 5)
+num_q = st.sidebar.slider("Number of Questions", 3, 100, 5)
 
 st.sidebar.markdown("---")
 

@@ -1,5 +1,5 @@
 {
-  "dbms": [
+  "DBMS": [
     {"id":1,"q":"Which integrity constraint prevents orphans in a child table?","options":["a) Check","b) Unique","c) Referential","d) Domain"],"ans":"c"},
     {"id":2,"q":"In a B+ Tree of order n, what is the maximum number of keys in a leaf node?","options":["a) n","b) n-1","c) n/2","d) 2n"],"ans":"b"},
     {"id":3,"q":"Which normal form deals with multi-valued dependencies?","options":["a) 3NF","b) BCNF","c) 4NF","d) 5NF"],"ans":"c"},
@@ -100,7 +100,7 @@
     {"id":99,"q":"What is 'OLTP'?","options":["a) High volume transactions","b) Complex analysis"],"ans":"a"},
     {"id":100,"q":"Final step of normalization?","options":["a) 3NF","b) BCNF","c) 5NF","d) Depends on requirements"],"ans":"d"}
   ],
-  "oops": [
+  "OOP": [
     {"id":1,"q":"Which feature allows a subclass to provide a specific implementation of a method already defined in its superclass?","options":["a) Overloading","b) Overriding","c) Abstraction","d) Composition"],"ans":"b"},
     {"id":2,"q":"What is 'Encapsulation'?","options":["a) Hiding data and methods together","b) Multiple forms of a function","c) Deriving new classes"],"ans":"a"},
     {"id":3,"q":"Which of these is used to achieve 100% abstraction in Java?","options":["a) Abstract Class","b) Interface","c) Final Class"],"ans":"b"},
@@ -202,7 +202,7 @@
     {"id":99,"q":"'Attribute' is another name for?","options":["a) Method","b) Member Variable","c) Constructor"],"ans":"b"},
     {"id":100,"q":"Object-oriented programming focuses on?","options":["a) Procedures","b) Objects and Data"],"ans":"b"}
   ],
-  "os": [
+  "Operating Systems": [
     {"id":1,"q":"Which state transition is valid?","options":["a) Ready to Blocked","b) Running to Ready","c) Blocked to Running"],"ans":"b"},
     {"id":2,"q":"What is a 'Zombie Process'?","options":["a) Parent died before child","b) Child finished but entry stays in table","c) Stuck in infinite loop"],"ans":"b"},
     {"id":3,"q":"The 'Critical Section' problem is related to?","options":["a) Memory leaks","b) Process synchronization","c) Deadlock recovery"],"ans":"b"},
@@ -304,7 +304,7 @@
     {"id":99,"q":"'C-SCAN' differs from 'SCAN' by?","options":["a) Not servicing on return trip","b) Faster speed"],"ans":"a"},
     {"id":100,"q":"'Network OS' vs 'Distributed OS'?","options":["a) Distributed OS looks like single system","b) Network OS is faster"],"ans":"a"}
   ],
-  "dsa": [
+  "DSA": [
     {"id":1,"q":"Time complexity of accessing an element in an array by index?","options":["a) O(1)","b) O(n)","c) O(log n)"],"ans":"a"},
     {"id":2,"q":"Which data structure follows the LIFO principle?","options":["a) Queue","b) Stack","c) Linked List"],"ans":"b"},
     {"id":3,"q":"Which of these is a stable sorting algorithm?","options":["a) Quicksort","b) Mergesort","c) Heapsort"],"ans":"b"},
@@ -406,7 +406,7 @@
     {"id":99,"q":"'Post-order' traversal is?","options":["a) Left-Right-Root","b) Root-Left-Right"],"ans":"a"},
     {"id":100,"q":"DSA is essential for?","options":["a) Efficiency","b) Storage only","c) Coding syntax"],"ans":"a"}
   ],
-  "cn": [
+  "Computer Networks": [
     {"id":1,"q":"Which layer of the OSI model is responsible for routing?","options":["a) Data Link","b) Network","c) Transport"],"ans":"b"},
     {"id":2,"q":"What is the size of an IPv4 address?","options":["a) 32 bits","b) 64 bits","c) 128 bits"],"ans":"a"},
     {"id":3,"q":"Which protocol is used to map IP addresses to MAC addresses?","options":["a) DNS","b) ARP","c) DHCP"],"ans":"b"},

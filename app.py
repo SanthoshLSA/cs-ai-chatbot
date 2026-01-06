@@ -2,11 +2,67 @@ import streamlit as st
 import json
 import random
 
+import requests
+
+# 1. Update Configuration to 2026 Router Standard
+HF_API_URL = "https://router.huggingface.co/v1/chat/completions"
+MODEL_ID = "Qwen/Qwen2.5-7B-Instruct"  # High availability
+HF_TOKEN = st.secrets["HF_TOKEN"]
+
+def query_ai(prompt):
+    headers = {
+        "Authorization": f"Bearer {HF_TOKEN}",
+        "Content-Type": "application/json"
+    }
+    
+    # New Payload Format
+    payload = {
+        "model": MODEL_ID,
+        "messages": [
+            {"role": "system", "content": "You are a CS Interview Tutor. Give concise, technical answers."},
+            {"role": "user", "content": prompt}
+        ],
+        "max_tokens": 500,
+        "temperature": 0.7
+    }
+
+    try:
+        response = requests.post(HF_API_URL, headers=headers, json=payload, timeout=10)
+        if response.status_code == 200:
+            result = response.json()
+            # Parsing logic for OpenAI-style response
+            return result['choices'][0]['message']['content'].strip()
+        else:
+            return f"⚠️ Router Error {response.status_code}: {response.text}"
+    except Exception as e:
+        return f"⚠️ Connection Error: {str(e)}"
+
+
 st.set_page_config(page_title="CS Interview Bot", layout="wide", initial_sidebar_state="expanded")
 
 # Complete Dark Theme with Blue Accents - Built from Scratch
 st.markdown("""
 <style>
+            
+
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    /* ========== POPPINS FONT EVERYWHERE ========== */
+    * {
+        font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    }
+
+    .stApp {
+        font-family: 'Poppins', sans-serif !important;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Poppins', sans-serif !important;
+        font-weight: 600 !important;
+    }
+
+   
+            
     /* ========== GLOBAL DARK THEME ========== */
     .stApp {
         background: linear-gradient(135deg, #0a0e27 0%, #1a1d3a 50%, #0f1729 100%);
@@ -365,7 +421,7 @@ st.markdown("""
 /* Textarea styling */
 [data-testid="stChatInput"] textarea {
     background: transparent !important;
-    color: #2196f3 !important;  /* Bright white-blue */
+    color: rgba(15, 20, 35, 0.98) !important;  /* Bright white-blue */
     border: none !important;
     font-size: 1rem !important;
     font-weight: 400 !important;
@@ -426,7 +482,7 @@ if 'quiz_total' not in st.session_state:
 # LIVE SCORE BADGE
 st.markdown(f'''
 <div class="score-live">
-    📊 Score: <strong>{st.session_state.quiz_score}/{st.session_state.quiz_total}</strong>
+     Score: <strong>{st.session_state.quiz_score}/{st.session_state.quiz_total}</strong>
 </div>
 ''', unsafe_allow_html=True)
 
@@ -514,9 +570,9 @@ if st.session_state.get('quiz_active', False):
                 
                 if user_choice == correct_ans:
                     st.session_state.quiz_score += 1
-                    feedback = f"<strong>Correct!</strong> You chose: <strong>{user_text}</strong>"
+                    feedback = f"<strong> 🟩 Correct!</strong> You chose: <strong>{user_text}</strong>"
                 else:
-                    feedback = f"<strong>Incorrect!</strong> You chose: <strong>{user_text}</strong><br>✓ Correct answer: <strong>{correct_ans}) {correct_text}</strong>"
+                    feedback = f"<strong> 🟥 Incorrect!</strong> You chose: <strong>{user_text}</strong><br>✓ Correct answer: <strong>{correct_ans}) {correct_text}</strong>"
                 
                 st.session_state.messages.append({"role": "assistant", "content": feedback})
                 
@@ -531,9 +587,11 @@ if st.session_state.get('quiz_active', False):
                 st.error("Please enter a valid option (a, b, c, or d)")
     
     with col2:
-        if st.button("Get Hint", key="explain", use_container_width=True):
-            hint = f" <strong>Hint:</strong> Think about the core concept of {topic}. The correct answer is option <strong>{q['ans']}</strong>"
-            st.session_state.messages.append({"role": "assistant", "content": hint})
+        if st.button("AI Explanation", key="explain", use_container_width=True):
+            context = f"The user is taking a quiz on {topic}. The question is: {q['q']}. Don't give the answer yet, but explain the underlying concept to help them choose."
+            with st.spinner("AI is thinking..."):
+                hint = query_ai(context)
+            st.session_state.messages.append({"role": "assistant", "content": f"AI Insight: {hint}"})
             st.rerun()
 
 # ========== CHAT INPUT ==========
@@ -542,11 +600,22 @@ else:
     if prompt:
         st.session_state.messages.append({"role": "user", "content": prompt})
         
-        if 'quiz' in prompt.lower():
-            reply = f" Great! Use the sidebar to select a topic and start your quiz. You can choose from: {', '.join(questions.keys())}"
-        else:
-            reply = f"Thanks for your question! I'm here to help with CS interview prep. Use the sidebar to start a quiz, or ask me more questions!"
+        # 1. Initialize reply with a fallback value
+        reply = "" 
+
+        with st.spinner("Thinking..."):
+            # 2. Check for keywords first
+            if 'quiz' in prompt.lower() and 'start' in prompt.lower():
+                reply = "Great! Use the sidebar to select a topic and click 'Start Quiz' to begin your assessment."
+            
+            # 3. Otherwise, call the AI
+            else:
+                try:
+                    reply = query_ai(prompt)
+                except Exception as e:
+                    reply = f"Sorry, I ran into an error: {str(e)}"
         
+        # 4. Now 'reply' is guaranteed to exist
         st.session_state.messages.append({"role": "assistant", "content": reply})
         st.rerun()
 import streamlit.components.v1 as components

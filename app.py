@@ -54,28 +54,49 @@ st.markdown("""
         background: linear-gradient(135deg, #0a0e27 0%, #1a1d3a 50%, #0f1729 100%);
     }
             
-           /* Force the sidebar to stay visible regardless of internal state */
+     /* Hide the keyboard_double_arrow_left button that collapses sidebar - AGGRESSIVE */
+    [data-testid="stSidebar"] button[kind="header"],
+    [data-testid="stSidebar"] [data-testid="baseButton-header"],
+    [data-testid="stSidebar"] button,
+    [data-testid="stSidebar"] > div > div > button:first-child,
+    [data-testid="stSidebar"] header button,
+    button[aria-label*="collapse"],
+    button[aria-label*="Close"] {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        width: 0 !important;
+        height: 0 !important;
+        position: absolute !important;
+        left: -9999px !important;
+    }
+
+    /* Keep sidebar always visible */
     [data-testid="stSidebar"] {
-        transform: none !important;
+        transform: translateX(0) !important;
         visibility: visible !important;
-        left: 0 !important;
     }
 
-    /* Hide the 'X' close button inside the sidebar */
-    [data-testid="sidebar-close-button"] {
-            color:red;
-        
-    }
-
-    /* Hide the chevron arrow on the main page */
+    /* Hide the collapsed control chevron on main page */
     [data-testid="stSidebarCollapsedControl"] {
         display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
     }
-
-    /* Ensure the main content area adjusts its margin to account for the sidebar */
-    [data-testid="stAppViewBlockContainer"] {
-        margin-left: 0px !important;
+    
+    /* Re-enable sidebar action buttons (Start Quiz, Reset All) */
+    [data-testid="stSidebar"] .stButton button {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        width: auto !important;
+        height: auto !important;
+        position: relative !important;
+        left: 0 !important;
     }
+           
     h1, h2, h3, h4, h5, h6 {
         font-family: 'Poppins', sans-serif !important;
         font-weight: 600 !important;
@@ -289,6 +310,7 @@ st.markdown("""
 
     .stTextInput div[data-baseweb="base-input"]:focus-within {
         border-color: #64b5f6 !important;
+       
         box-shadow: 0 0 18px rgba(100, 181, 246, 0.45) !important;
     }
 
@@ -388,6 +410,7 @@ st.markdown("""
         border: 2px solid rgba(33, 150, 243, 0.6) !important;
         border-radius: 50px !important;
         padding: 0.75rem 1.25rem !important;
+        outline: none !important
         box-shadow:
             0 4px 20px rgba(0, 0, 0, 0.4),
             inset 0 1px 3px rgba(255, 255, 255, 0.05) !important;
@@ -395,7 +418,9 @@ st.markdown("""
     }
 
     [data-testid="stChatInput"]:focus-within {
+            
         border-color: #2196f3 !important;
+        outline: none !important;
         box-shadow:
             0 0 0 3px rgba(33, 150, 243, 0.2),
             0 8px 30px rgba(33, 150, 243, 0.4),
@@ -405,7 +430,7 @@ st.markdown("""
 
     [data-testid="stChatInput"] textarea {
         background: transparent !important;
-        color: rgba(15, 20, 35, 0.98) !important;
+        color: white !important;
         border: none !important;
         font-size: 1rem !important;
         font-weight: 400 !important;

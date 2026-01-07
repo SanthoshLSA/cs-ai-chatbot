@@ -1,6 +1,6 @@
-# CS Interview Prep AI Chatbot 🤖
+# CS Interview Prep AI Chatbot 
 
-Live Demo: [Add link after deploy]
+Live Demo: https://santhosh-cs-ai-chatbot.streamlit.app/
 
 Streamlit web app that:
 - Delivers MCQ quizzes on DBMS, OS, DSA fundamentals
